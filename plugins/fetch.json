@@ -1,0 +1,56 @@
+{
+    "cordova-plugin-device": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/apache/cordova-plugin-device",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "org.apache.cordova.file": {
+        "source": {
+            "type": "local",
+            "path": "..\\org.apache.cordova.file-1.3.3"
+        }
+    },
+    "org.apache.cordova.media": {
+        "source": {
+            "type": "local",
+            "path": "..\\org.apache.cordova.media-0.2.13"
+        }
+    },
+    "org.apache.cordova.media-capture": {
+        "source": {
+            "type": "local",
+            "path": "..\\org.apache.cordova.media-capture-0.3.6"
+        }
+    },
+    "nl.x-services.plugins.insomnia": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Telerik-Verified-Plugins/Insomnia",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-screen-orientation": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/gbenvenuti/cordova-plugin-screen-orientation.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.tokbox.cordova.opentok": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/songz/cordova-plugin-opentok",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}

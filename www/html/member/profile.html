@@ -1,0 +1,111 @@
+<!--<div class="pause-audio" ng-show="PauseAudio" style="z-index:99999;position: fixed;bottom:5px;right:10px">
+    <button class="btn btn-default btn-sm"
+            ng-click="pauseAudio()">Pause</button>
+</div>-->
+    <div class="container app-navbar-nav" style="max-width:640px;margin-top:5px;">
+        <!--<div class="top-nav btn-group" role="group" aria-label="menu">-->
+        <div class="top-navItem3 btn-group" role="group" aria-label="menu">
+          <!--<a href="#/groups" ng-disabled="!haveMemberInfo" class="btn btn-lg btn-default">RECORD</a>-->
+          <a href="#/groups" class="btn btn-lg btn-default" ng-style="styleNavElem">RECORD</a>
+          <a href="#/recordings" class="btn btn-lg btn-default" ng-style="styleNavElem">PLAY</a>
+          <a href="#/profile" class="btn btn-lg btn-primary" ng-style="styleNavElem">SETTINGS</a>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <h3 style="text-align:center;">Introduce Yourself</h3>
+
+        <div class="form-horizontal"
+                style="padding:10px 0px">
+
+
+            <div class="form-group">
+                <label class="control-label col-sm-3 col-sm-offset-2" style="cursor:pointer"> First Name: </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" ng-model="memberInfo.FirstName" ng-change="onChangeMember()" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 col-sm-offset-2" style="cursor:pointer"> Last Name: </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" ng-model="memberInfo.LastName" ng-change="onChangeMember()" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-3 col-sm-offset-2" style="cursor:pointer"> Invitation Code: </label>
+                <div class="col-sm-5" style="position: relative">
+                    <input type="text" class="form-control" maxlength="6" ng-model="memberGroup.InvitationCode" ng-change="onChangeInviteCode()" />
+                    <div ng-if="!isConnectedGroup && !isChangeMember" style="position: absolute;right:0px;top: 5%;margin-right: 17px;">
+                        <button  class="btn btn-primary btn-sm" ng-disabled="!isValid()" ng-click="submit();connect();">Connect</button>
+                    </div>
+                    <div ng-if="(isChangeMember && !isConnectedGroup) || (isChangeMember && isConnectedGroup) || (isChangeMember && isConnectedGroup && isChangeInviteCode) || (isConnectedGroup && isChangeInviteCode)" style="position: absolute;right:0px;top: 5%;margin-right: 17px;">
+                        <button  class="btn btn-success btn-sm" ng-disabled="!isValid()" ng-click="submit();">Update</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group slider-mic">
+                <label class="control-label col-sm-3 col-sm-offset-2" style="cursor:pointer"> Adjust gain </label>
+                <div class="col-sm-5">
+                    <rzslider rz-slider-model="sliderMic.value" rz-slider-options="sliderMic.options">
+                    </rzslider>
+                </div>
+            </div>
+
+            <!--(memberGroup.GroupId || isConnectedGroup)-->
+            <div class="form-group" ng-if="isConnectedGroup">
+                <label class="control-label col-sm-3 col-sm-offset-2" style="cursor:pointer;">Group:
+                    <i ng-bind='memberGroup.GroupName'></i>
+
+                </label>
+                <div class="col-sm-5">
+                    <div class="" style="">
+                        <!--<button ng-if="!recording" class="btn btn-sm btn-danger"  ng-click="disconnect()">Disconnect</button>-->
+                        <button ng-if="!recording" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#modalByDisconnect" >Disconnect</button>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="alert alert-danger" style="font-size:14px;padding: 15px;margin: 15px;" ng-bind="connectError" ng-if="connectError"></div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 col-sm-offset-2" style="cursor:pointer"> Choral Part / Instrument: </label>
+                <div class="col-sm-5">
+                    <select class="form-control"
+                            ng-options="i.Name as i.Name for i in instruments"
+                            ng-model="memberInfo.Instrument"
+                            ng-change="onChangeMember()"></select>
+                </div>
+            </div>
+            <!--<div style="text-align:center">-->
+            <!--<button class="btn btn-primary joinGroup" type="button" ng-click="connect()">Join Group</button>-->
+            <!--</div>-->
+
+            <!--<div class="form-group" style="text-align:center;padding-left: 15px;padding-right: 15px;">-->
+                <!--<button type="submit" ng-disabled="!isValid()" ng-click="submit();connect();" class="btn btn-success btn-lg">Save changes</button>-->
+            <!--</div>-->
+
+        </div>
+    </div>
+<!-- Modal -->
+<div class="modal fade" id="modalByDisconnect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                <!--<h4 class="modal-title" id="myModalLabel">Warning!</h4>-->
+            <!--</div>-->
+            <div class="modal-body" style="text-align: center;"> Are you sure you want to disconnect from this group?
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-primary" ng-click="disconnect()">Yes</button>
+                <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

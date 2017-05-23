@@ -1,0 +1,133 @@
+<!--<div class="pause-audio" ng-show="PauseAudio" style="z-index:99999;position: fixed;bottom:5px;right:10px">
+    <button class="btn btn-default btn-sm"
+            ng-click="pauseAudio()">Pause</button>
+</div>-->
+    <div class="container app-navbar-nav" style="max-width:640px;margin-top:5px;">
+        <div class="top-navItem3 btn-group" role="group" aria-label="menu">
+            <a href="#/groups" ng-disabled="recording" class="btn btn-lg btn-primary" ng-style="styleNavElem">RECORD</a>
+            <!--<a href="#/recordings" ng-disabled="!isConnectedGroup" class="btn btn-lg btn-default ">PLAY</a>-->
+            <a href="#/recordings" class="btn btn-lg btn-default" ng-style="styleNavElem">PLAY</a>
+            <a href="#/profile" ng-disabled="recording" class="btn btn-lg btn-default" ng-style="styleNavElem">SETTINGS</a>
+        </div>
+    </div>
+
+
+
+    <!--<div class="container" ng-if="!isConnected()">-->
+        <!--<h3 style="text-align:center;">Join a Group</h3>-->
+
+        <!--<div class="form-horizontal" style="padding:10px 0px">-->
+
+            <!--<div class="form-group" style="margin-bottom:5px">-->
+                <!--<label class="control-label col-sm-3 col-sm-offset-2" style="cursor:pointer"> Invitation Code: </label>-->
+                <!--<div class="col-sm-3">-->
+                    <!--<input type="text" class="form-control" style="font-size:20px"-->
+                        <!--maxlength="6" ng-model="object.InvitationCode" />-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div style="text-align:center">-->
+                <!--<button class="btn btn-primary joinGroup" type="button" ng-click="connect()">Join Group</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="container" ng-if="!isConnected()">
+        <div class="row  hidden-desktop" style="margin-top:30px;margin-bottom:20px" ng-click="direct('#/profile')">
+
+            <div class="col-md-1 col-md-offset-4" style="text-align:center">
+                <div class="pulse1"></div>
+                <div class="pulse2"></div>
+                <img src="images/member_settings.svg" alt="" class="joinImg" style=""/>
+            </div>
+            <div class="col-md-2">
+                <div style="text-align:center;margin-top:15px;font-size:18px;">COMPLETE SETTINGS FIRST</div>
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-show="!isRelease" ng-if="isConnected()">
+        <div class="row  hidden-desktop" style="margin-top:30px;margin-bottom:20px" ng-click="release()">
+
+            <div class="col-md-1 col-md-offset-4" style="text-align:center">
+                <div class="pulse1"></div>
+                <div class="pulse2"></div>
+                <img src="images/member_lock.svg" alt="" class="joinImg" style=""/>
+            </div>
+            <div class="col-md-2">
+                <div style="text-align:center;margin-top:15px;font-size:18px;">PRESS TO ALLOW MICROPHONE ACCESS</div>
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-if="isRelease && isConnected()">
+
+        <div class="row  hidden-desktop" style="margin-top:30px;margin-bottom:20px">
+            <div class="col-md-1 col-md-offset-4 MemberRec" style="text-align:center" ng-click="release()" ng-disabled="!!recording" ng-style="styleMemberRec">
+            <!--<div class="col-md-1 col-md-offset-4 MemberRec" style="text-align:center" ng-click="release()" ng-disabled="!!recording" >-->
+                <div class="pulse3"></div>
+                <!--<div class="pulse4"></div>-->
+		        <img src="images/member.svg" alt="" class="joinImg" style=""/>
+	         </div>
+            <div class="col-md-2" ng-if="limitLockTimer">
+                <div style="text-align:center;margin-top:15px;color:#f55a4e">time before lock</div>
+                <div style="padding:0px;margin:0px;text-align:center;font-size:16px;" ng-bind="limitLockTimer | nice_duration"></div>
+            </div>
+            <div class="col-md-2">
+		        <div style="text-align:center;margin-top:15px;">Connected to</div>
+                <h3 style="padding:0px;margin:0px;text-align:center;" ng-bind="memberGroup.GroupName"></h3>
+            </div>
+            <div class="col-md-2">
+                <div style="text-align:center;margin-top:15px;font-size: 16px;line-height: 1.7;">
+                    <span ng-bind="memberInfo.FirstName"></span>
+                    &nbsp;
+                    <span ng-bind="memberInfo.LastName"></span>
+                </div>
+                <div style="text-align: center;margin-top: 5px;font-size: 16px;" class="badgeInstrument">
+                    <div class="label label-info" ng-bind="memberInfo.Instrument"></div>
+                </div>
+            </div>
+            <div class="col-md-1">
+            	<div style="text-align:center;margin:20px 0px">
+                        <!--<div class="slider-mic">-->
+                            <!--<div >Adjust gain</div>-->
+                            <!--<rzslider rz-slider-model="sliderMic.value" rz-slider-options="sliderMic.options">-->
+                            <!--</rzslider>-->
+                        <!--</div>-->
+                        <div class="comp-hidden">
+                            <div class="switch-mic">
+                                <form class="switch-mic-form">
+                                    <switch id="enabled" name="enabled" ng-model="switchMic.state" ng-change="switchMicGain(switchMic.state)" class="green"></switch>
+                                    <br>Microphone: {{ switchMic.state }}
+                                </form>
+                            </div>
+                        </div>
+
+
+            		<!--<button ng-if="!recording" class="btn btn-default btn-sm" ng-click="disconnect()">Disconnect</button>-->
+                    <div ng-if="recording"  class="alert alert-danger" style="font-size:18px">
+                        <span>Recording In Progress<br /></span>
+                        <div class="recordingDuration"><div style="color:black" ng-bind="recordingDuration | nice_duration"></div></div>
+                        <strong style="font-size:20px;" ng-bind="track.Name"></strong>
+                        <div class="limitRecord">
+                            limit
+                            <strong style="font-size:15px;" ng-bind="limitRecord | nice_duration"></strong>
+                        </div>
+
+                    </div>
+            	</div>
+            </div>
+        </div>
+
+        <!--<div class="row hidden-mobile" style="margin-top:30px;margin-bottom:20px">-->
+
+                <!--<div style="text-align:center;margin-top:15px;">Connected to</div>-->
+                <!--<h1 style="padding:0px;margin:0px;text-align:center;" ng-bind="memberGroup.GroupName"></h1>-->
+
+                <!--<div style="text-align:center;margin:20px 0px">-->
+
+                    <!--<button ng-if="!recording" class="btn btn-default btn-sm" ng-click="disconnect()">Disconnect</button>-->
+                    <!--<div ng-if="recording"  class="alert alert-danger" style="font-size:18px">-->
+                        <!--<span>Recording In Progress<br /></span>-->
+                        <!--<div style="color:black" ng-bind="recordingDuration | nice_duration"></div>-->
+                        <!--<strong style="font-size:20px;" ng-bind="track.Name"></strong>-->
+                    <!--</div>-->
+                <!--</div>-->
+        <!--</div>-->
+    </div>

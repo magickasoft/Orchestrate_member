@@ -1,0 +1,135 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font: 13px Helvetica, Arial; }
+form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+form.switch-mic-form{padding: 3px; width: 100%;background: transparent;position: inherit;}
+form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+
+.top-nav  { width:100%; }
+.top-nav .btn { width: 50%; }
+.top-navItem3 .btn { width: 33%; }
+
+#messages { list-style-type: none; margin: 0; padding: 0; }
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #eee; }
+
+
+@media( min-width:960px ) {
+    .hidden-desktop { /*display:none !important;*/ }
+}
+@media( max-width:959px ) {
+    .hidden-mobile { /*display:none !important;*/  }
+}
+.modal-dialog {
+  margin-top:10%;
+
+}
+
+/* ANGULARJS ANIMATION START */
+
+.view-frame-parent {
+  position: relative;
+  min-height: 250px;
+}
+.view-frame.ng-enter,
+.view-frame.ng-leave {
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+.view-frame.ng-enter {
+  -webkit-animation: 0.4s fade-in;
+  -moz-animation: 0.4s fade-in;
+  -o-animation: 0.4s fade-in;
+  animation: 0.4s fade-in;
+  z-index: 10;
+}
+.view-frame.ng-leave {
+  -webkit-animation: 0.4s fade-out;
+  -moz-animation: 0.4s fade-out;
+  -o-animation: 0.4s fade-out;
+  animation: 0.4s fade-out;
+  z-index: 9;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+/* ANGULARJS ANIMATION END */
+.slider-mic, .switch-mic{
+  /*display: none;*/
+}
+.comp-hidden, .limitRecord, .recordingDuration, .SYSLOG{
+  display: none;
+}
+.disabledDiv {
+  pointer-events: none;
+  opacity: 0.4;
+}
+.joinImg {
+  width:40%;
+  height:auto;
+}
+
+@media (min-width:380px) and (max-width:570px) {
+  .joinImg, .pulse4, .pulse3, .pulse2, .pulse1 {
+    width:33%;
+  }
+}
+@media (min-width:571px) and (max-width:768px) {
+  .joinImg, .pulse4, .pulse3, .pulse2, .pulse1 {
+    width:28%;
+  }
+}
+@media (min-width:769px){
+  .joinImg, .pulse4, .pulse3, .pulse2, .pulse1 {
+    width:25%;
+  }
+}

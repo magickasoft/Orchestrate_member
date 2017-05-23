@@ -1,0 +1,54 @@
+<!--<div class="pause-audio" ng-show="PauseAudio" style="z-index:99999;position: fixed;bottom:5px;right:10px">
+    <button class="btn btn-default btn-sm"
+            ng-click="pauseAudio()">Pause</button>
+</div>-->
+<div class="container app-navbar-nav" style="max-width:640px;margin-top:5px;">
+    <div class="top-navItem3 btn-group" role="group" aria-label="menu">
+        <a href="#/groups" class="btn btn-lg btn-default" ng-style="styleNavElem">RECORD</a>
+        <a href="#/recordings" class="btn btn-lg btn-primary" ng-style="styleNavElem">PLAY</a>
+        <a href="#/profile" class="btn btn-lg btn-default" ng-style="styleNavElem">SETTINGS</a>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 ng-bind="object.Name"></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div style="line-height:30px" ng-bind="object.Created | nice_datetime"></div>
+        </div>
+        <div class="col-md-2" style="margin-bottom:5px;">
+            <input type="text" class="form-control filter-track" ng-model="search" placeholder="Filter Tracks" />
+        </div>
+    </div>
+  <div class="row">
+    <div ng-style="tableStyle" class="col-md-12 table-recording" style="overflow: auto;-webkit-overflow-scrolling: touch;">
+
+        <!--<h1 ng-bind="object.Name"></h1>-->
+        <!--<div style="line-height:30px" ng-bind="object.Created"></div>-->
+
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr ng-repeat="t in object.tracks | filter: search">
+              <td style="width:40px; padding: 0px 10px; line-height:40px;" ng-bind="($index + 1)+'.'"></td>
+              <!--<td style="font-size:12px; padding: 0px 10px; font-weight:bold; vertical-align:middle; width:200px" ng-bind="t | nice_track_name">-->
+              <td style="font-size:12px; padding: 0px 10px; font-weight:bold; vertical-align:middle; width:200px">
+                  <!--<a ng-href="{{ t | nice_audio}}" style="font-size:12px; font-weight:bold;" ng-bind="t | nice_track_name"></a>-->
+                  <!--<a data-urlhref="{{ t | nice_audio}}" onclick="playAudio(this.dataset.urlhref)" style="font-size:12px; font-weight:bold;" ng-bind="t | nice_track_name"></a>-->
+                 <a ng-click="nice_audio(t)" style="font-size:12px; font-weight:bold;" ng-bind="t | nice_track_name"></a>
+              </td>
+              <td style="font-size:14px; padding: 0px 10px; line-height:40px;width:60px; " ng-bind="t.Duration | before_dot"></td>
+              <td style="padding:0px;height:40px;"><img style="height:40px;width:{{t.width}}px" ng-src="{{ t.png | nice_png}}" alt="" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+    </div>
+  </div>
+</div>
